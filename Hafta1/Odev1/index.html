@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="todo.png" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <h1 class="title">To Do List</h1>
+        <div class="todo-container input-group mb-3">
+          <input
+            type="text"
+            class="input"
+            id="todo-text"
+            placeholder="What are you going to do?"
+          />
+          <button id="todo-button" class="btn btn-primary" onclick="saveWork()">
+            Save
+          </button>
+        </div>
+      </div>
+
+      <hr class="wide-hr" />
+
+      <div class="todo-body">
+        <!-- Pending -->
+        <h2 class="title-pending">
+          Pending <span class="hide">hide</span>
+          <span class="show display-none">show</span>
+        </h2>
+
+        <ul class="list" id="list-pending"></ul>
+        <hr class="wide-hr" />
+
+        <!-- Done -->
+        <h2 class="title-done">
+          Done <span class="hide">hide</span>
+          <span class="show display-none">show</span>
+        </h2>
+
+        <ul class="list" id="list-done"></ul>
+        <hr class="wide-hr" />
+
+        <!-- Cancelled -->
+        <h2 class="title-cancelled">
+          Cancelled <span class="hide">hide</span>
+          <span class="show display-none">show</span>
+        </h2>
+
+        <ul class="list" id="list-cancelled"></ul>
+      </div>
+    </div>
+    <div class="footer"></div>
+
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  </body>
+</html>
