@@ -7,23 +7,25 @@ let cancelledList = document.getElementById("list-cancelled");
 let show = document.querySelectorAll(".show")
 let hide = document.querySelectorAll(".hide")
 let title = document.querySelector(".title")
-
 const saveButton = document.getElementById("todo-button");
 
+// İşlem başlıklarına tıklandığında açılıp kapanmaları
 pending.addEventListener("click", () => { pendingList.classList.toggle("display-none"); hide[0].classList.toggle("display-none"); show[0].classList.toggle("display-none"); });
 done.addEventListener("click", () => { doneList.classList.toggle("display-none"); hide[1].classList.toggle("display-none"); show[1].classList.toggle("display-none"); });
 cancelled.addEventListener("click", () => { cancelledList.classList.toggle("display-none"); hide[2].classList.toggle("display-none"); show[2].classList.toggle("display-none"); });
 
+// Yeni girdi yapıldığında pending bölümüne eklenmesi
 const saveWork = () => {
     let textDOM = document.getElementById("todo-text")
     text = textDOM.value
 
-    
+    // Text boş ise hata verilmesi
     if (text == "" || text.replace(/^\s+|\s+$/g, "").length == 0) {
         title.innerHTML = "Text cannot be empty"
         title.style.color = "#fa560f"
         setTimeout(() => { title.innerHTML = "To Do List"; title.style.color = "white" }, 1500)
     }
+    // İş zaten varsa hata verilmesi
     else if(isExist(text)){
         title.innerHTML = "Work already exist"
         title.style.color = "#fa560f"
@@ -31,7 +33,6 @@ const saveWork = () => {
     }
     else {
         let li = document.createElement("li");
-        // const ul = document.getElementById("list")
         li.innerHTML = `
         <div class="li-text">${text}</div>
         <div class="li-buttons">
@@ -48,8 +49,10 @@ const saveWork = () => {
     textDOM.value = "";
 }
 
+// İşin Done başlığı altına eklenmesi
 const makeDone = (doneButton) => {
     let li = document.createElement("li");
+    // Yapıldı butonuna tıklandığında burası çalışır
     if (typeof doneButton == "object") {
         let textToDone = doneButton.parentElement.parentElement.childNodes[1].innerText;
         doneButton.parentElement.parentElement.remove()
@@ -68,6 +71,7 @@ const makeDone = (doneButton) => {
         let obj = { "createdAt": localValue.createdAt, "updatedAt": new Date(), "process": "done" }
         localStorage.setItem(textToDone, JSON.stringify(obj))
     }
+    // Sayfa yenilendiğinde localstorage'dan doldurulacağında burası çalışır
     else if (typeof doneButton == "string") {
         li.innerHTML = `
         <div class="li-text">${doneButton}</div>
@@ -82,8 +86,10 @@ const makeDone = (doneButton) => {
 
 }
 
+// İşin Cancelled başlığı altına eklenmesi
 const makeCancel = (cancelButton) => {
     let li = document.createElement("li");
+    // Cancel butonuna tıklandığında burası çalışır
     if (typeof cancelButton == "object") {
         let textToCancel = cancelButton.parentElement.parentElement.childNodes[1].innerText;
         cancelButton.parentElement.parentElement.remove()
@@ -102,6 +108,7 @@ const makeCancel = (cancelButton) => {
         let obj = { "createdAt": localValue.createdAt, "updatedAt": new Date(), "process": "cancelled" }
         localStorage.setItem(textToCancel, JSON.stringify(obj))
     }
+    // Sayfa yenilendiğinde localstorage'dan doldurulacağında burası çalışır
     else if (typeof cancelButton == "string") {
         li.innerHTML = `
         <div class="li-text">${cancelButton}</div>
@@ -116,8 +123,10 @@ const makeCancel = (cancelButton) => {
 
 }
 
+// İşin Pending başlığı altına eklenmesi
 const makePending = (pendingButton) => {
     let li = document.createElement("li");
+    // Bekleme butonuna tıklandığında burası çalışır
     if (typeof pendingButton == "object") {
         let textToPending = pendingButton.parentElement.parentElement.childNodes[1].innerText;
         pendingButton.parentElement.parentElement.remove()
@@ -137,6 +146,7 @@ const makePending = (pendingButton) => {
         let obj = { "createdAt": localValue.createdAt, "updatedAt": new Date(), "process": "pending" }
         localStorage.setItem(textToPending, JSON.stringify(obj))
     }
+    // Sayfa yenilendiğinde localstorage'dan doldurulacağında burası çalışır
     else if (typeof pendingButton == "string") {
         li.innerHTML = `
         <div class="li-text">${pendingButton}</div>
@@ -150,10 +160,11 @@ const makePending = (pendingButton) => {
     }
 }
 
+// Update butonuna tıklandığında textin güncellenmesi ve local storage a kaydedilmesi
 const updateText = (updateButton) => {
     let text = updateButton.parentElement.parentElement.childNodes[1].innerText;
     let newText = prompt("New Text ?");
-
+    // Text'in localstorage'da olup olmadığının kontrolü
     if(isExist(newText)){
         alert("Work already exist")
         setTimeout(() => { alert }, 1500)
@@ -168,6 +179,7 @@ const updateText = (updateButton) => {
 
 }
 
+// Info butonuna tıklandığında alertte işin, oluşturulma tarihinin, son değiştirme tarihinin ve durumunun gösterilmesi
 const showInfo = (infoButton) => {
     let text = infoButton.parentElement.parentElement.childNodes[1].innerText;
     let data = JSON.parse(localStorage.getItem(text))
@@ -180,16 +192,17 @@ const showInfo = (infoButton) => {
     )
 }
 
-
+// İşin olup olmadığını kontrol eden fonksiyon
 const isExist = (textToControl) => localStorage.getItem(textToControl) ? true : false;
 
     
 
-// Get All Data From Local Storage Immediately
+// Sayfa yenilendiğinde localstorage'dan sayfanın doldurulması
 (() => {
     let keys = Object.keys(localStorage)
     keys.forEach(item => {
         let key = JSON.parse(localStorage.getItem(item))
+        // Objelerin process keylerine göre gerekli başlıklar altına eklenmesi
         key.process == "done" ? makeDone(item) : key.process == "cancelled" ? makeCancel(item) : makePending(item)
     })
 })();
