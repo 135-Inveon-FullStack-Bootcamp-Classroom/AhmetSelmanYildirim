@@ -164,10 +164,13 @@ const makePending = (pendingButton) => {
 const updateText = (updateButton) => {
     let text = updateButton.parentElement.parentElement.childNodes[1].innerText;
     let newText = prompt("New Text ?");
+    
+    if(newText == "" || newText.replace(/^\s+|\s+$/g, "").length == 0){
+        alert("Text cannot be empty");
+    }
     // Text'in localstorage'da olup olmadığının kontrolü
-    if(isExist(newText)){
+    else if(isExist(newText)){
         alert("Work already exist")
-        setTimeout(() => { alert }, 1500)
     }
     else {
         updateButton.parentElement.parentElement.childNodes[1].innerText = newText;
@@ -183,19 +186,33 @@ const updateText = (updateButton) => {
 const showInfo = (infoButton) => {
     let text = infoButton.parentElement.parentElement.childNodes[1].innerText;
     let data = JSON.parse(localStorage.getItem(text))
-    alert(
+    let deleteTask = confirm(
         `
         Text: ${text}
         Created at: ${data.createdAt}
         Last update: ${data.updatedAt}
-        Process: ${data.process}`
+        Process: ${data.process}
+        
+        Do you want to delete the task?
+        `
     )
+    if(deleteTask) {
+        localStorage.removeItem(text)
+        location.reload()
+    }
 }
 
 // İşin olup olmadığını kontrol eden fonksiyon
 const isExist = (textToControl) => localStorage.getItem(textToControl) ? true : false;
 
     
+const deleteAll = () =>{
+    let deleteAllTasks = confirm("Do you want to delete all tasks");
+    if(deleteAllTasks){
+        localStorage.clear(); 
+        location.reload() 
+    }
+}
 
 // Sayfa yenilendiğinde localstorage'dan sayfanın doldurulması
 (() => {
