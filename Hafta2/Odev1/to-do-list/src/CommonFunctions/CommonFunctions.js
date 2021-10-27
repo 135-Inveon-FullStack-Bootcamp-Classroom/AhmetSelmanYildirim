@@ -1,14 +1,12 @@
 const updateStatus = (item, todos, setTodos, newStatus) => {
 
-    console.log(newStatus);
-    console.log(todos);
     // state update
     let newTodos = [...todos]
     newTodos = newTodos.filter(t => t.text !== item.text)
     newTodos.push({ text: item.text, status: newStatus, createdAt: item.createdAt, updatedAt: new Date() })
     setTodos(newTodos)
-    console.log(newTodos);
 
+    //localStorage update
     localStorage.setItem("todos", JSON.stringify(newTodos))
 
 }
@@ -31,7 +29,7 @@ const updateText = (item, todos, setTodos) => {
             newTodos.push({ text: newText, status: item.status, createdAt: item.createdAt, updatedAt: new Date() })
             setTodos(newTodos)
 
-            
+
             localStorage.setItem("todos", JSON.stringify(newTodos))
 
         }
@@ -42,24 +40,25 @@ const updateText = (item, todos, setTodos) => {
 
 // Info butonuna tıklandığında todonun detayının gösterilmesi ve silinmesi
 const showInfo = (item, todos, setTodos) => {
-    let data = JSON.parse(localStorage.getItem(item.text))
+    let allLocalStorage = JSON.parse(localStorage.getItem("todos"))
+    let data = allLocalStorage.filter(i => i.text === item.text)
     let deleteTask = window.confirm(
         `
-        Text: ${data.text}
-        Status: ${data.status}
-        Created at: ${data.createdAt}
-        Last update: ${data.updatedAt}
+        Text: ${data[0].text}
+        Status: ${data[0].status}
+        Created at: ${data[0].createdAt}
+        Last update: ${data[0].updatedAt}
         
         Do you want to delete the task?
         `
     )
     if (deleteTask) {
-        //Deleting todo from localStorage
-        localStorage.removeItem(item.text)
         //Deleting todo from state
         let newTodos = [...todos]
         newTodos = newTodos.filter(t => t.text !== item.text)
         setTodos(newTodos)
+        //Deleting todo from localStorage
+        localStorage.setItem("todos", JSON.stringify(newTodos))
     }
 
 }
@@ -68,8 +67,8 @@ const showInfo = (item, todos, setTodos) => {
 const isExist = (textToControl) => {
     const localStorageData = localStorage.getItem("todos");
     const dataArray = JSON.parse(localStorageData)
-    const data = dataArray.find(item => item.text === textToControl )
-    if(data) return true
+    const data = dataArray.find(item => item.text === textToControl)
+    if (data) return true
     else return false
 }
 

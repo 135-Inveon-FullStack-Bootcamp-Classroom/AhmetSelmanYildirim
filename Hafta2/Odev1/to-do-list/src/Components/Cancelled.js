@@ -4,7 +4,8 @@ import { updateText, showInfo, updateStatus } from '../CommonFunctions/CommonFun
 const Cancelled = ({ todos, setTodos }) => {
 
     const [show, setShow] = useState(true)
-    const cancelledTodos = todos.filter(item => item.status === "cancelled")
+    let cancelledTodos = []
+    if (todos) { cancelledTodos = todos.filter(item => item.status === "cancelled") }
 
     return (
         <div>

@@ -3,7 +3,13 @@ import './App.css';
 import Header from "./Components/Header";
 import ToDoList from "./Components/ToDoList";
 
-const deleteAll = (setTodos) => { localStorage.clear(); setTodos([]) }
+const deleteAll = (setTodos) => {
+  let confirm = window.confirm(`Do you want to delete all todos`)
+  if (confirm) {
+    localStorage.clear();
+    setTodos([])
+  }
+}
 
 function App() {
 
@@ -12,7 +18,9 @@ function App() {
   let [title, setTitle] = useState("To Do List");
 
   useEffect(() => {
-    setTodos(JSON.parse(localStorage.getItem("todos")))
+    if (localStorage.length > 0) {
+      setTodos(JSON.parse(localStorage.getItem("todos")))
+    }
   }, []);
 
   return (

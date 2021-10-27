@@ -1,6 +1,12 @@
-In the project directory, you can run:
+---------------
 
-### `npm start`
+### To run at local
+Use this commands in the project directory:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. npm install
+
+2. npm start
+
+Or you can see [Live](https://react-to-do-list-asy.netlify.app/)
+
+---------------

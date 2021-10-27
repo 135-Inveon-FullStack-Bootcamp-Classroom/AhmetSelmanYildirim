@@ -4,7 +4,8 @@ import { updateText, showInfo, updateStatus } from '../CommonFunctions/CommonFun
 const Pending = ({ todos, setTodos }) => {
 
     const [show, setShow] = useState(true)
-    const pendingTodos = todos.filter(item => item.status === "pending")
+    let pendingTodos = []
+    if (todos) { pendingTodos = todos.filter(item => item.status === "pending") }
 
     return (
         <div>

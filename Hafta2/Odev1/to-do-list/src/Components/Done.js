@@ -4,7 +4,8 @@ import { updateText, showInfo, updateStatus } from '../CommonFunctions/CommonFun
 const Done = ({ todos, setTodos }) => {
 
     const [show, setShow] = useState(true)
-    const doneTodos = todos.filter(item => item.status === "done")
+    let doneTodos = []
+    if (todos) { doneTodos = todos.filter(item => item.status === "done") }
 
     return (
         <div>
