@@ -1,20 +1,16 @@
 import React, { useState } from 'react'
 import { updateText, showInfo, updateStatus } from '../CommonFunctions/CommonFunctions';
 
-
 const Done = ({ todos, setTodos }) => {
 
     const [show, setShow] = useState(true)
-
     const doneTodos = todos.filter(item => item.status === "done")
 
     return (
         <div>
             <h2 className="title-done" onClick={() => { setShow(!show) }} > Done {show ? <span className="hide">hide</span> : <span className="show">show</span>} </h2>
-
             {show &&
                 <ul className="list">
-
                     {
                         doneTodos.map((item, index) => (
                             <li key={item + index}><div className="li-text">{item.text}</div>
@@ -27,14 +23,10 @@ const Done = ({ todos, setTodos }) => {
                             </li>
                         ))
                     }
-
-
                 </ul>
             }
-
         </div>
     )
 }
-
 
 export default Done

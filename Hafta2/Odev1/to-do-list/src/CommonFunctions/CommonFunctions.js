@@ -1,15 +1,15 @@
 const updateStatus = (item, todos, setTodos, newStatus) => {
 
+    console.log(newStatus);
+    console.log(todos);
     // state update
     let newTodos = [...todos]
     newTodos = newTodos.filter(t => t.text !== item.text)
-    newTodos.push({ text: item.text, status: newStatus })
+    newTodos.push({ text: item.text, status: newStatus, createdAt: item.createdAt, updatedAt: new Date() })
     setTodos(newTodos)
+    console.log(newTodos);
 
-    // localStorage update
-    let localValue = JSON.parse(localStorage.getItem(item.text))
-    let obj = { text: item.text, status: newStatus, createdAt: localValue.createdAt, updatedAt: new Date() }
-    localStorage.setItem(item.text, JSON.stringify(obj))
+    localStorage.setItem("todos", JSON.stringify(newTodos))
 
 }
 
@@ -28,13 +28,12 @@ const updateText = (item, todos, setTodos) => {
         else {
             let newTodos = [...todos]
             newTodos = newTodos.filter(t => t.text !== item.text)
-            newTodos.push({ text: newText, status: item.status, createdAt: item.createdAt })
+            newTodos.push({ text: newText, status: item.status, createdAt: item.createdAt, updatedAt: new Date() })
             setTodos(newTodos)
 
-            // let oldKeyData = localStorage.getItem(item.text)
-            localStorage.setItem(newText, JSON.stringify({ text: newText, status: item.status, createdAt: item.createdAt, updatedAt: new Date() }))
+            
+            localStorage.setItem("todos", JSON.stringify(newTodos))
 
-            localStorage.removeItem(item.text)
         }
     }
 
@@ -65,27 +64,13 @@ const showInfo = (item, todos, setTodos) => {
 
 }
 
-
-
-/*
-//Todoları localstrogedan dolduran fonksiyon
-const getAllTodosFromLocalStorage = () => {
-
-    let keys = Object.keys(localStorage);
-    let data = []
-    keys.forEach(item => {
-        let key = JSON.parse(localStorage.getItem(item))
-        let updatedAt = key.updatedAt ? key.updatedAt : "There is no update"
-        data.push({ text: key.text, status: key.status, createdAt: key.createdAt, updatedAt: updatedAt })
-        // setTodos([...todos, { text: key.text, status: key.status, createdAt: key.createdAt, updatedAt: updatedAt }])
-    })
-
-    return data;
-
-}
-*/
-
 // Todonun olup olmadığını kontrol eden fonksiyon
-const isExist = (textToControl) => localStorage.getItem(textToControl) ? true : false;
+const isExist = (textToControl) => {
+    const localStorageData = localStorage.getItem("todos");
+    const dataArray = JSON.parse(localStorageData)
+    const data = dataArray.find(item => item.text === textToControl )
+    if(data) return true
+    else return false
+}
 
 export { updateText, showInfo, updateStatus }

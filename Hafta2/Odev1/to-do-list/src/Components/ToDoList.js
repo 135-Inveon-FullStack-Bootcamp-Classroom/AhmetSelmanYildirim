@@ -3,7 +3,6 @@ import Pending from "./Pending";
 import Done from "./Done";
 import Cancelled from "./Cancelled";
 
-
 const ToDoList = ({ todos, setTodos }) => {
 
     return (

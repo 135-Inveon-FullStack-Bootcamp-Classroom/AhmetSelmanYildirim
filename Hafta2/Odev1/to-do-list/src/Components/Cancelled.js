@@ -4,9 +4,7 @@ import { updateText, showInfo, updateStatus } from '../CommonFunctions/CommonFun
 const Cancelled = ({ todos, setTodos }) => {
 
     const [show, setShow] = useState(true)
-
     const cancelledTodos = todos.filter(item => item.status === "cancelled")
-
 
     return (
         <div>
@@ -14,7 +12,6 @@ const Cancelled = ({ todos, setTodos }) => {
 
             {show &&
                 <ul className="list">
-
                     {
                         cancelledTodos.map((item, index) => (
                             <li key={item + index}><div className="li-text">{item.text}</div>
@@ -27,11 +24,8 @@ const Cancelled = ({ todos, setTodos }) => {
                             </li>
                         ))
                     }
-
-
                 </ul>
             }
-
         </div>
     )
 }
