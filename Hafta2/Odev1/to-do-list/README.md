@@ -13,6 +13,6 @@
 
 2. ```npm start```
 
-#### Or you can see [Live](https://react-to-do-list-asy.netlify.app/)
+#### Or you can see [Live](https://react-todo-list-asy.netlify.app/)
 
 ---------------
