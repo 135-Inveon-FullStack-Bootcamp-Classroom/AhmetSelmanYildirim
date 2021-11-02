@@ -30,7 +30,7 @@ const KeysSection = () => {
             <KeyButton label="3" isDarker isNumber />
             <KeyButton label="+" isOperator />
 
-            <KeyButton label="+/-" isDarker />
+            <KeyButton label="+/-" isDarker isOperator />
             <KeyButton label="0" isDarker isNumber />
             <KeyButton label="." isDarker isDot/>
             <KeyButton label="=" isBlue isOperator />

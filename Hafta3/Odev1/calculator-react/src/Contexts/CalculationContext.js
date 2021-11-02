@@ -109,7 +109,15 @@ export const CalculationProvider = ({ children }) => {
           setMainText(Math.sqrt(Number(mainText)))
           break;
 
-
+        case "+/-":
+          let sign = mainText.toString().substring(0, 1)
+          if (sign !== "-") {
+            setMainText("-"+mainText)
+          }
+          else{
+            setMainText(mainText.toString().substring(1, mainText.length))
+          }
+          break;
 
         case "=":
           if (currentOperation === "+") {
@@ -137,9 +145,18 @@ export const CalculationProvider = ({ children }) => {
         default:
           break;
       }
+    }
 
-      if (isDot) { console.log("dot"); }
-
+    if (isDot) {
+      if (resetMainTextNextTime) {
+        setMainText(label);
+        setResetMainTextNextTime(false);
+      }
+      else {
+        setMainText((mainText) => {
+          return mainText + label;
+        });
+      }
     }
   };
 
