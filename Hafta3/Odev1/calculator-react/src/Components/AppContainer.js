@@ -1,3 +1,4 @@
+// Uygulamanin temiz gorunmesi icin diger componentleri iceren ana component
 const AppContainer = ({children}) => {
     return (
         <div className="app-container">

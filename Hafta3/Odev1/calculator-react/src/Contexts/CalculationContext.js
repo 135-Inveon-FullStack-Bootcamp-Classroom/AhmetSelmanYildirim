@@ -9,9 +9,11 @@ export const CalculationProvider = ({ children }) => {
   const [lastResult, setLastResult] = useState("");
   const [currentOperation, setCurrentOperation] = useState("");
 
+  // Tuslara tiklaninca calisacak fonksiyon
   const handleKeyClick = (isNumber, label, isOperator, isDot) => {
-    console.log(isNumber, label, isOperator);
-    if (isNumber) {
+
+    // Eger tiklanan tus bir numara ise textler duzenlenir
+    if (isNumber || isDot) {
       if (resetMainTextNextTime) {
         setMainText(label);
         setResetMainTextNextTime(false);
@@ -23,6 +25,7 @@ export const CalculationProvider = ({ children }) => {
       }
     }
 
+    //Eger tiklanan tus bir operator ise islemler yapilir ve sonuc yazdirilir
     if (isOperator) {
       setCurrentOperation(label);
       setResetMainTextNextTime(true);
@@ -112,13 +115,13 @@ export const CalculationProvider = ({ children }) => {
         case "+/-":
           let sign = mainText.toString().substring(0, 1)
           if (sign !== "-") {
-            setMainText("-"+mainText)
+            setMainText("-" + mainText)
           }
-          else{
+          else {
             setMainText(mainText.toString().substring(1, mainText.length))
           }
           break;
-
+        // = tiklanirsa statedeki son islem yaptirilir, last result sifirlanir main text sonuc olarak duzenlenir.
         case "=":
           if (currentOperation === "+") {
             setMainText(Number(mainText) + lastResult);
@@ -147,19 +150,9 @@ export const CalculationProvider = ({ children }) => {
       }
     }
 
-    if (isDot) {
-      if (resetMainTextNextTime) {
-        setMainText(label);
-        setResetMainTextNextTime(false);
-      }
-      else {
-        setMainText((mainText) => {
-          return mainText + label;
-        });
-      }
-    }
-  };
 
+  };
+  // edinilen veriler contexti kullanacak componentlere verilir.
   return (
     <CalculationContext.Provider
       value={{

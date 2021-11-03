@@ -1,6 +1,7 @@
 import React from 'react'
 import KeyButton from './KeyButton'
 
+// Her bir tusun olusturulmasi ve labellarinin verilmesi
 const KeysSection = () => {
     return (
         <div className="keys-section">

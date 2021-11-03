@@ -44,12 +44,14 @@
 
 .screen-section .top-text{
   color: white;
-  font-size: 13px
+  font-size: 13px;
+  max-width: 95%;
 }
 
 .screen-section .main-text{
   font-size: 30px;
   color: white;
+  max-width: 95%;
 }
 
 .keys-section{

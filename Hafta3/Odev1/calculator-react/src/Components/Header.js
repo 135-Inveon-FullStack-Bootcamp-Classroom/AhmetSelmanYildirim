@@ -1,5 +1,5 @@
 import React from 'react'
-
+// Sadece header yazisini yazmaya yarayan component
 const Header = () => {
     return (
         <div className="header">

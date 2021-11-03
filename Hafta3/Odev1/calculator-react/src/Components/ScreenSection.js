@@ -4,7 +4,7 @@ import { CalculationContext } from '../Contexts/CalculationContext';
 const ScreenSection = () => {
     const { mainText, lastResult, currentOperation } = useContext(CalculationContext);
 
-
+    // Ustteki kucuk text alanini duzenleyen fonksiyon
     const renderCaption = () => {
 
         if (lastResult && currentOperation)
@@ -16,6 +16,7 @@ const ScreenSection = () => {
             )
     }
 
+    // Tum sonuclarin gosterilecegi ekran alani
     return (
         <div className="screen-section">
             {renderCaption()}
