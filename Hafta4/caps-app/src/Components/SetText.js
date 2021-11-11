@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { getMemeById } from '../Redux/Actions/memeActions';
 
@@ -32,11 +33,14 @@ function SetText(props) {
     // Textler belirlenerek capsin olusturulmasi saglanir 
     return (
         <div style={styles.container}>
+            
             <input type="text"  value={text0} placeholder="Text 1" onChange={(e)=>{setText0(e.target.value)}} />
             <br/>
             <input type="text" value={text1} placeholder="Text 2" onChange={(e)=>{setText1(e.target.value)}} />
             <br/>
             <button onClick={() => { generateUrl(text0,text1) }}> Generate Caps </button>
+            <br/>
+            <a href="/" > Go back to home </a>
         </div>
     )
 }
