@@ -38,16 +38,15 @@ namespace ToDoApp.ToDoProject
                 {
                     switch (int.Parse(choose))
                     {
-                        // Listing
+                        // List
                         case 1: CardOperations.listTheBoard(mainList); break;
-
-                        // Adding
+                        // Add
                         case 2: CardOperations.addCard(members, mainList); break;
-
+                        // Delete
                         case 3: CardOperations.deleteCard(mainList); break;
-
+                        // Update
                         case 4: CardOperations.updateCard(mainList); break;
-
+                        // Quit
                         case 5: q = 0; break;
 
                         default: Console.WriteLine("Do not try me, please."); break;
@@ -59,9 +58,6 @@ namespace ToDoApp.ToDoProject
                 }
 
             }
-
-
-
         }
     }
 }

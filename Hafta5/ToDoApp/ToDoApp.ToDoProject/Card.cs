@@ -5,7 +5,6 @@ namespace ToDoApp.ToDoProject
 {
     public class Card
     {
-        public Card() { }
         public Card(string title, string description, Member member, Size size, Line line)
         {
             this.Title = title;
@@ -25,12 +24,6 @@ namespace ToDoApp.ToDoProject
 
 
     }
-    public enum Size
-    {
-        XS, S, M, L, XL
-    }
-    public enum Line
-    {
-        TODO, IN_PROGRESS, DONE
-    }
+    
+    
 }

@@ -18,7 +18,7 @@ namespace ToDoApp.ToDoProject
                     Console.WriteLine("Title       : " + i.Title);
                     Console.WriteLine("Description : " + i.Description);
                     Console.WriteLine("Member      : " + i.Member.Name);
-                    Console.WriteLine("Size        : " + i.Size);
+                    Console.WriteLine((string)("Size        : " + i.Size));
                     Console.WriteLine("Line        : " + i.Line);
                     Console.WriteLine("-");
                 }
@@ -32,7 +32,7 @@ namespace ToDoApp.ToDoProject
                     Console.WriteLine("Title       : " + i.Title);
                     Console.WriteLine("Description : " + i.Description);
                     Console.WriteLine("Member      : " + i.Member.Name);
-                    Console.WriteLine("Size        : " + i.Size);
+                    Console.WriteLine((string)("Size        : " + i.Size));
                     Console.WriteLine("Line        : " + i.Line);
                     Console.WriteLine("-");
                 }
@@ -46,7 +46,7 @@ namespace ToDoApp.ToDoProject
                     Console.WriteLine("Title       : " + i.Title);
                     Console.WriteLine("Description : " + i.Description);
                     Console.WriteLine("Member      : " + i.Member.Name);
-                    Console.WriteLine("Size        : " + i.Size);
+                    Console.WriteLine((string)("Size        : " + i.Size));
                     Console.WriteLine("Line        : " + i.Line);
                     Console.WriteLine("-");
                 }
@@ -177,7 +177,7 @@ namespace ToDoApp.ToDoProject
                     Console.WriteLine("Title       : " + mainList[indexTitleToUpdate].Title);
                     Console.WriteLine("Description : " + mainList[indexTitleToUpdate].Description);
                     Console.WriteLine("Member      : " + mainList[indexTitleToUpdate].Member.Name);
-                    Console.WriteLine("Size        : " + mainList[indexTitleToUpdate].Size);
+                    Console.WriteLine((string)("Size        : " + mainList[indexTitleToUpdate].Size));
                     Console.WriteLine("Line        : " + mainList[indexTitleToUpdate].Line);
                     Console.WriteLine("\nPlease choose the line you want card to move: ");
                     Console.WriteLine("(1) TODO");
@@ -194,9 +194,7 @@ namespace ToDoApp.ToDoProject
             catch (FormatException e)
             {
                 System.Console.WriteLine("Data type incorrect");
-            }
-
-            
+            }           
         }
     }
 }
