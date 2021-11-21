@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Imdb_Clone.Application.DirectorOperations.Commands;
+using Imdb_Clone.Application.DirectorOperations.Queries;
+using Imdb_Clone.DbOperations;
+using Imdb_Clone.Entities;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Imdb_Clone.Controllers
 {
@@ -10,10 +10,29 @@ namespace Imdb_Clone.Controllers
     [Route("api/[controller]")]
     public class DirectorController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Index()
+        private readonly ImdbDbContext _dbContext;
+
+        public DirectorController(ImdbDbContext dbContext)
         {
-            return Ok("Directors");
+            _dbContext = dbContext;
         }
+        [HttpGet]
+        public IActionResult GetDirectors()
+        {
+            GetDirectorsQuery query = new(_dbContext);
+            var directors = query.Handle();
+
+            return Ok(directors);
+        }
+
+        [HttpPost]
+        public IActionResult AddDirector([FromBody] Director director)
+        {
+            CreateDirectorCommand command = new(_dbContext);
+            command.Handle(director);
+
+            return Ok("Register successfull");
+        }
+
     }
 }

@@ -12,6 +12,8 @@ namespace Imdb_Clone.DbOperations
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
+            List<string> lotrActors = new List<string>() { "Elijah", "Ian", "Orlando" };
+            List<string> slActors = new List<string>() { "Liam", "Ralph", "Ben" };
             using (var context = new ImdbDbContext(serviceProvider.GetRequiredService<DbContextOptions<ImdbDbContext>>()))
             {
                 if (context.Movies.Any())
@@ -23,12 +25,19 @@ namespace Imdb_Clone.DbOperations
                     new Movie
                     {
                         Name= "Lord of the Rings",
-                        Year= new DateTime(2001)
+                        Year= "2001",
+                        Actors= "lotrActors",
+                        Director = "Peter Jackson",
+                        Genre = "Fantastic"
+
                     },
                     new Movie
                     {
                         Name = "Schindler's List",
-                        Year = new DateTime(1993)
+                        Year = "1993",
+                        Actors = "slActors",
+                        Director = "Steven Spielberg",
+                        Genre = "History"
                     }
                     );
 
@@ -71,6 +80,21 @@ namespace Imdb_Clone.DbOperations
                     {
                         Name="Orlando",
                         Surname="Bloom"
+                    },
+                    new Actor
+                    {
+                        Name="Liam",
+                        Surname="Neeson"
+                    },
+                    new Actor
+                    {
+                        Name="Ralph",
+                        Surname="Fiennes"
+                    },
+                    new Actor
+                    {
+                        Name="Ben",
+                        Surname="Kingsley"
                     }
                     );
 

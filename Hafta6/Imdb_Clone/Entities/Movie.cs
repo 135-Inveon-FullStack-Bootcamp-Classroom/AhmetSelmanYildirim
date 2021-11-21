@@ -11,8 +11,9 @@ namespace Imdb_Clone.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MovieId { get; set; }
         public string Name { get; set; }
-        public DateTime Year { get; set; }
-        
-
+        public string Year { get; set; }
+        public string Genre { get; set; }
+        public string Director { get; set; }
+        public string Actors { get; set; }   
     }
 }
