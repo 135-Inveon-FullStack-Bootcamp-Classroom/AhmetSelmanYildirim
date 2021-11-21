@@ -11,7 +11,6 @@ namespace Imdb_Clone.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GenreId { get; set; }
         public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Fullname { get => Name + " " + Surname; }
+
     }
 }

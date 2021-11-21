@@ -12,6 +12,6 @@ namespace Imdb_Clone.Entities
         public int DirectorId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Fullname { get => Name + " " + Surname; }
+        private string Fullname { get => Name + " " + Surname; }
     }
 }

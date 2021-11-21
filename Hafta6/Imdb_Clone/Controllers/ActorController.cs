@@ -13,7 +13,7 @@ namespace Imdb_Clone.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return Ok("Movies");
+            return Ok("Actors");
         }
     }
 }
