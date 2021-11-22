@@ -38,5 +38,26 @@ namespace Imdb_Clone.Controllers
             return Ok("Register successfull");
         }
 
+        [HttpPut("id")]
+        public IActionResult UpdateGenre(int id, [FromBody] UpdateGenreVM updatedGenre)
+        {
+            UpdateGenreCommand command = new(_dbContext);
+            command.GenreId = id;
+            command.Model = updatedGenre;
+            command.Handle();
+
+            return Ok("Update successfull");
+        }
+
+        [HttpDelete("id")]
+        public IActionResult DeleteGenre(int id)
+        {
+            DeleteGenreCommand command = new(_dbContext);
+            command.GenreId = id;
+            command.Handle();
+
+            return Ok("Delete successfull");
+        }
+
     }
 }

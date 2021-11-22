@@ -35,5 +35,26 @@ namespace Imdb_Clone.Controllers
             return Ok("Register successfull");
         }
 
+        [HttpPut("id")]
+        public IActionResult UpdateActor(int id, [FromBody] UpdateActorVM updatedActor)
+        {
+            UpdateActorCommand command = new(_dbContext);
+            command.ActorId = id;
+            command.Model = updatedActor;
+            command.Handle();
+
+            return Ok("Update successfull");
+        }
+
+        [HttpDelete("id")]
+        public IActionResult DeleteActor(int id)
+        {
+            DeleteActorCommand command = new(_dbContext);
+            command.ActorId = id;
+            command.Handle();
+
+            return Ok("Delete successfull");
+        }
+
     }
 }
