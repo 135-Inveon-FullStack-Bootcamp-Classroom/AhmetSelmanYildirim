@@ -31,7 +31,6 @@ namespace Imdb_Clone.Application.MovieOperations.Commands
             movie.Name = Model.Name;
             movie.GenreId = Model.GenreId;
             movie.DirectorId = Model.DirectorId;
-            movie.Actors = Model.Actors;
             movie.Year = Model.Year;
 
             _dbContext.SaveChanges();

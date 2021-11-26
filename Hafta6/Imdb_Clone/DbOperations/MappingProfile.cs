@@ -20,8 +20,8 @@ namespace Imdb_Clone.DbOperations
         public MappingProfile()
         {
             // MOVIE
-            CreateMap<Actor, MovieActors>()
-                .ForMember(dto=> dto.Fullname, opt=> opt.MapFrom(x=>x.MovieActors));
+            CreateMap<MovieActor, MovieActorsDTO>()
+                .ForMember(dto => dto.Fullname, opt => opt.MapFrom(x => x.Actor.Fullname));
 
             CreateMap<Movie, MoviesVM>()
                 .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Genre.Name))
@@ -30,7 +30,7 @@ namespace Imdb_Clone.DbOperations
             CreateMap<CreateMovieVM, Movie>();
 
             // GENRE
-            CreateMap<Movie, MovieNamesVM>();
+            CreateMap<Movie, MovieNamesDTO>();
             CreateMap<Genre, GenresVM>();
 
             CreateMap<CreateGenreVM, Genre>();
@@ -40,11 +40,12 @@ namespace Imdb_Clone.DbOperations
             CreateMap<CreateDirectorVM, Director>();
 
             // ACTOR
+            CreateMap<MovieActor, ActorMoviesDTO>()
+                .ForMember(dto => dto.Name, opt => opt.MapFrom(x => x.Movie.Name));
             CreateMap<Actor, ActorsVM>();
             CreateMap<CreateActorVM, Actor>();
 
-            // MOVIEACTOR
-            //CreateMap<ActorsVM,>
+
         }
     }
 }

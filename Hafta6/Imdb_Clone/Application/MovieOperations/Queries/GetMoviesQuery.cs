@@ -36,9 +36,9 @@ namespace Imdb_Clone.Application.MovieOperations.Queries
         public string Year { get; set; }
         public string Genre { get; set; }
         public string Director { get; set; }
-        public ICollection<MovieActors> MovieActors { get; set; }
+        public ICollection<MovieActorsDTO> MovieActors { get; set; }
     }
-    public class MovieActors
+    public class MovieActorsDTO
     {
         public string Fullname { get; set; }
     }

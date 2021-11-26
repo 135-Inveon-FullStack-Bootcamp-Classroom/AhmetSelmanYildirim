@@ -33,9 +33,9 @@ namespace Imdb_Clone.Application.GenreOperations.Queries
     {
         public int GenreId { get; set; }
         public string Name { get; set; }
-        public ICollection<MovieNamesVM> Movies { get; set; }
+        public ICollection<MovieNamesDTO> Movies { get; set; }
     }
-    public class MovieNamesVM
+    public class MovieNamesDTO
     {
         public string Name { get; set; }
     }

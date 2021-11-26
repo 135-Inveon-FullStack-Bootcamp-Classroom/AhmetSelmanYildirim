@@ -34,5 +34,11 @@ namespace Imdb_Clone.Application.ActorOperations.Queries
     {
         public int ActorId { get; set; }
         public string Fullname { get; set; }
+        public ICollection<ActorMoviesDTO> MovieActors { get; set; }
+
+    }
+    public class ActorMoviesDTO
+    {
+        public string Name { get; set; }
     }
 }

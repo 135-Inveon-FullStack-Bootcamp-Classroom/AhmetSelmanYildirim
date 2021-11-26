@@ -16,7 +16,6 @@ namespace Imdb_Clone.Entities
         public virtual Genre Genre { get; set; }
         public int DirectorId {get;set;}
         public virtual Director Director { get; set; }
-        public string Actors { get; set; }
         public virtual ICollection<MovieActor> MovieActors { get; set; }
     }
 }

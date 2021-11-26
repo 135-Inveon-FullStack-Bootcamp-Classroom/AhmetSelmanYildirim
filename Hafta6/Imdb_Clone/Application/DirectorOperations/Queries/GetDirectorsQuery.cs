@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Imdb_Clone.Application.GenreOperations.Queries;
 using Imdb_Clone.DbOperations;
 using Imdb_Clone.Entities;
 using System;
@@ -33,6 +34,7 @@ namespace Imdb_Clone.Application.DirectorOperations.Queries
     {
         public int DirectorId { get; set; }
         public string Fullname { get; set; }
+        public ICollection<MovieNamesDTO> Movies { get; set; }
 
     }
 }
