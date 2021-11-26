@@ -12,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Imdb_Clone
@@ -35,6 +36,9 @@ namespace Imdb_Clone
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Imdb_Clone", Version = "v1" });
             });
             services.AddDbContext<ImdbDbContext>(x => x.UseInMemoryDatabase(databaseName: "ImdbDb"));
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            //To show list
+            services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
         }
 

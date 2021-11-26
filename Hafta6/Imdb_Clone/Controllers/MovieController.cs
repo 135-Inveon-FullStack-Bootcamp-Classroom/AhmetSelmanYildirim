@@ -1,4 +1,5 @@
-﻿using Imdb_Clone.Application.MovieOperations.Commands;
+﻿using AutoMapper;
+using Imdb_Clone.Application.MovieOperations.Commands;
 using Imdb_Clone.Application.MovieOperations.Queries;
 using Imdb_Clone.DbOperations;
 using Imdb_Clone.Entities;
@@ -12,26 +13,29 @@ namespace Imdb_Clone.Controllers
     public class MovieController : ControllerBase
     {
         private readonly ImdbDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public MovieController(ImdbDbContext dbContext)
+        public MovieController(ImdbDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult GetMovies()
         {
-            GetMoviesQuery query = new(_dbContext);
+            GetMoviesQuery query = new(_dbContext, _mapper);
             var movies = query.Handle();
 
             return Ok(movies);
         }
 
         [HttpPost]
-        public IActionResult AddMovie([FromBody] Movie movie)
+        public IActionResult AddMovie([FromBody] CreateMovieVM movie)
         {
-            CreateMovieCommand command = new(_dbContext);
-            command.Handle(movie);
+            CreateMovieCommand command = new(_dbContext, _mapper);
+            command.Model = movie;
+            command.Handle();
 
             return Ok("Register successfull");
         }

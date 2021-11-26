@@ -13,5 +13,7 @@ namespace Imdb_Clone.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Fullname { get => Name + " " + Surname; }
+        public virtual ICollection<Movie> Movies { get; set; }
+
     }
 }

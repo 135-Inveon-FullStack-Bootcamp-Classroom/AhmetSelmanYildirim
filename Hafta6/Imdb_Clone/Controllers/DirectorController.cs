@@ -1,4 +1,5 @@
-﻿using Imdb_Clone.Application.DirectorOperations.Commands;
+﻿using AutoMapper;
+using Imdb_Clone.Application.DirectorOperations.Commands;
 using Imdb_Clone.Application.DirectorOperations.Queries;
 using Imdb_Clone.DbOperations;
 using Imdb_Clone.Entities;
@@ -11,25 +12,28 @@ namespace Imdb_Clone.Controllers
     public class DirectorController : ControllerBase
     {
         private readonly ImdbDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public DirectorController(ImdbDbContext dbContext)
+        public DirectorController(ImdbDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
         [HttpGet]
         public IActionResult GetDirectors()
         {
-            GetDirectorsQuery query = new(_dbContext);
+            GetDirectorsQuery query = new(_dbContext, _mapper);
             var directors = query.Handle();
 
             return Ok(directors);
         }
 
         [HttpPost]
-        public IActionResult AddDirector([FromBody] Director director)
+        public IActionResult AddDirector([FromBody] CreateDirectorVM director)
         {
-            CreateDirectorCommand command = new(_dbContext);
-            command.Handle(director);
+            CreateDirectorCommand command = new(_dbContext, _mapper);
+            command.Model = director;
+            command.Handle();
 
             return Ok("Register successfull");
         }

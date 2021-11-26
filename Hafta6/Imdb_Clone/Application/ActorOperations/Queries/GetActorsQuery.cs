@@ -1,4 +1,5 @@
-﻿using Imdb_Clone.DbOperations;
+﻿using AutoMapper;
+using Imdb_Clone.DbOperations;
 using Imdb_Clone.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,18 +11,28 @@ namespace Imdb_Clone.Application.ActorOperations.Queries
     public class GetActorsQuery
     {
         private readonly ImdbDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public GetActorsQuery(ImdbDbContext dbContext)
+        public GetActorsQuery(ImdbDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
-        public List<Actor> Handle()
+        public List<ActorsVM> Handle()
         {
 
             var actors = _dbContext.Actors.ToList();
 
-            return actors;
+            List<ActorsVM> vm = _mapper.Map<List<ActorsVM>>(actors);
+
+            return vm;
         }
+    }
+
+    public class ActorsVM
+    {
+        public int ActorId { get; set; }
+        public string Fullname { get; set; }
     }
 }

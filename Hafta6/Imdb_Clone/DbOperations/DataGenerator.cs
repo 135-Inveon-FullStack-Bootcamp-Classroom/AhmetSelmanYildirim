@@ -12,8 +12,7 @@ namespace Imdb_Clone.DbOperations
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            List<string> lotrActors = new List<string>() { "Elijah", "Ian", "Orlando" };
-            List<string> slActors = new List<string>() { "Liam", "Ralph", "Ben" };
+
             using (var context = new ImdbDbContext(serviceProvider.GetRequiredService<DbContextOptions<ImdbDbContext>>()))
             {
                 if (context.Movies.Any())
@@ -27,8 +26,8 @@ namespace Imdb_Clone.DbOperations
                         Name= "Lord of the Rings",
                         Year= "2001",
                         Actors= "lotrActors",
-                        Director = "Peter Jackson",
-                        Genre = "Fantastic"
+                        DirectorId = 1,
+                        GenreId = 1,
 
                     },
                     new Movie
@@ -36,8 +35,17 @@ namespace Imdb_Clone.DbOperations
                         Name = "Schindler's List",
                         Year = "1993",
                         Actors = "slActors",
-                        Director = "Steven Spielberg",
-                        Genre = "History"
+                        DirectorId = 2,
+                        GenreId = 2
+                    },
+                    new Movie
+                    {
+                        Name = "Sully",
+                        Year = "2016",
+                        Actors = "SA",
+                        DirectorId = 3,
+                        GenreId = 2,
+
                     }
                     );
 
@@ -62,6 +70,11 @@ namespace Imdb_Clone.DbOperations
                     {
                         Name="Peter",
                         Surname="Jackson"
+                    },
+                    new Director
+                    { 
+                        Name="Clint",
+                        Surname="Eastwood"
                     }
                     );
 
@@ -95,6 +108,16 @@ namespace Imdb_Clone.DbOperations
                     {
                         Name="Ben",
                         Surname="Kingsley"
+                    },
+                    new Actor
+                    {
+                        Name="Tom",
+                        Surname="Hanks"
+                    },
+                    new Actor
+                    {
+                        Name="Aaron",
+                        Surname="Eckhart"
                     }
                     );
 

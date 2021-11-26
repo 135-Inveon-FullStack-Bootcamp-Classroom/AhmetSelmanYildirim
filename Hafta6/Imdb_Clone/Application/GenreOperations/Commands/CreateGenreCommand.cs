@@ -1,4 +1,5 @@
-﻿using Imdb_Clone.DbOperations;
+﻿using AutoMapper;
+using Imdb_Clone.DbOperations;
 using Imdb_Clone.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,26 +11,34 @@ namespace Imdb_Clone.Application.GenreOperations.Commands
     public class CreateGenreCommand
     {
         private readonly ImdbDbContext _dbContext;
+        private readonly IMapper _mapper;
+        public CreateGenreVM Model;
 
-        public CreateGenreCommand(ImdbDbContext dbContext)
+        public CreateGenreCommand(ImdbDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
-        public void Handle(Genre newGenre)
+        public void Handle()
         {
-            var genre = _dbContext.Genres.SingleOrDefault(x => x.Name == newGenre.Name);
+            var genre = _dbContext.Genres.SingleOrDefault(x => x.Name == Model.Name);
 
             if (genre is not null)
             {
                 throw new InvalidOperationException("Genre already exist");
             }
 
-            newGenre.GenreId = 0;
+            genre = _mapper.Map<Genre>(Model);
 
-            _dbContext.Genres.Add(newGenre);
+            _dbContext.Genres.Add(genre);
             _dbContext.SaveChanges();
 
         }
+    }
+
+    public class CreateGenreVM
+    {
+        public string Name { get; set; }
     }
 }

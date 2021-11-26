@@ -1,4 +1,5 @@
-﻿using Imdb_Clone.Application.GenreOperations.Commands;
+﻿using AutoMapper;
+using Imdb_Clone.Application.GenreOperations.Commands;
 using Imdb_Clone.Application.GenreOperations.Queries;
 using Imdb_Clone.DbOperations;
 using Imdb_Clone.Entities;
@@ -15,25 +16,28 @@ namespace Imdb_Clone.Controllers
     public class GenreController : ControllerBase
     {
         private readonly ImdbDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public GenreController(ImdbDbContext dbContext)
+        public GenreController(ImdbDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
         [HttpGet]
         public IActionResult GetGenres()
         {
-            GetGenresQuery query = new(_dbContext);
+            GetGenresQuery query = new(_dbContext, _mapper);
             var genres = query.Handle();
 
             return Ok(genres);
         }
 
         [HttpPost]
-        public IActionResult AddGenre([FromBody] Genre genre)
+        public IActionResult AddGenre([FromBody] CreateGenreVM genre)
         {
-            CreateGenreCommand command = new(_dbContext);
-            command.Handle(genre);
+            CreateGenreCommand command = new(_dbContext, _mapper);
+            command.Model = genre;
+            command.Handle();
 
             return Ok("Register successfull");
         }

@@ -29,8 +29,8 @@ namespace Imdb_Clone.Application.MovieOperations.Commands
             }
 
             movie.Name = Model.Name;
-            movie.Genre = Model.Genre;
-            movie.Director = Model.Director;
+            movie.GenreId = Model.GenreId;
+            movie.DirectorId = Model.DirectorId;
             movie.Actors = Model.Actors;
             movie.Year = Model.Year;
 
@@ -42,8 +42,8 @@ namespace Imdb_Clone.Application.MovieOperations.Commands
         {
             public string Name { get; set; }
             public string Year { get; set; }
-            public string Genre { get; set; }
-            public string Director { get; set; }
+            public int GenreId { get; set; }
+            public int DirectorId { get; set; }
             public string Actors { get; set; }
         }
 
